@@ -1,0 +1,111 @@
+{
+  "name": "zustand",
+  "private": true,
+  "version": "2.0.0",
+  "description": "🐻 Bear necessities for state management in React",
+  "main": "index.cjs.js",
+  "module": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "**"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "rollup -c && npm run copy",
+    "prepare": "npm run build --scripts-prepend-node-path",
+    "test": "jest",
+    "test:dev": "jest --watch --no-coverage",
+    "test:coverage:watch": "jest --watch",
+    "copy": "copyfiles -f package.json readme.md LICENSE dist && json -I -f dist/package.json -e \"this.private=false; this.devDependencies=undefined; this.optionalDependencies=undefined; this.scripts=undefined; this.husky=undefined; this.prettier=undefined; this.jest=undefined; this['lint-staged']=undefined;\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "tabWidth": 2,
+    "printWidth": 80
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drcmda/zustand.git"
+  },
+  "keywords": [
+    "react",
+    "state",
+    "manager",
+    "management",
+    "redux",
+    "store"
+  ],
+  "author": "Paul Henschel",
+  "contributors": [
+    "Jeremy Holcomb (https://github.com/JeremyRH)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drcmda/zustand/issues"
+  },
+  "homepage": "https://github.com/drcmda/zustand#readme",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "jest",
+      "legacy"
+    ],
+    "testRegex": "test.(js|ts|tsx)$",
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html",
+      "text",
+      "text-summary"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,ts,tsx}",
+      "tests/**/*.{js,ts,tsx}"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-typescript": "^7.6.0",
+    "@babel/preset-env": "^7.6.2",
+    "@testing-library/react": "^9.3.0",
+    "@types/jest": "^24.0.18",
+    "@types/react": "^16.9.5",
+    "copyfiles": "^2.1.1",
+    "husky": "^3.0.8",
+    "jest": "^24.9.0",
+    "json": "^9.0.6",
+    "lint-staged": "^9.4.1",
+    "prettier": "^1.18.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.23.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-size-snapshot": "^0.10.0",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "typescript": "^3.6.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8"
+  }
+}
